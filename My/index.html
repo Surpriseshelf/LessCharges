@@ -1,107 +1,164 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-
-<style type="text/css">
-h1 
-{
-border:red solid thin;
-outline-style:dotted;
-outline-color:#00ff00;
-}
-
-div
-{
-float:left;
-width:200px;
-height:250px;
-margin:0 0 15px 20px;
-padding:15px;
-border:1px solid black;
-text-align:center;
-}
-
-img.big 
-{
-height: 555px
-}
-ul.inside 
-{
-list-style-position: inside
-}
-</style>
-
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
 <meta charset="utf-8">
 <meta name="keywords" content="话费套餐, 手机话费, 推荐套餐" />
 <title>话费套餐 免费推荐</title>
+<script type="text/javascript" src="jquery.js"></script>
+<!--css-->
+<style type="text/css">
+body 
+{
+	font-family:"宋体";
+}
+h1
+{
+	font-size:70px;
+}
+</style>
 
+<script type="text/javascript">
+<!--这里是判断输入的号码是否正确（非空且11位）-->
+function validnumber(field,alerttxt)
+{
+	with (field)
+    {
+        if (value==null||value==""||value.length!=11||isNaN)
+    	{
+			alert(alerttxt);
+			return false;
+		}
+  		else 
+		{return true}
+    }
+}
+
+function validateform(thisform)
+{
+	with (thisform)
+    {
+ 		if (validnumber( number," your input is a error!")==false)
+    	{
+			number.focus();
+			return false;
+		}
+    }
+}
+</script>
+<!--这里是判断其他的输入是否为空-->
+<script>
+function validnull(field,alerttxt)
+{
+	with (field)
+    {
+        if (value==null||value=="")
+    	{
+			alert(alerttxt);
+			return false;
+		}
+  		else 
+		{return true}
+    }
+}
+
+function validate_form(thisform)
+{
+	with (thisform)
+    {
+ 		if (validnull(context," must be filled up!")==false)
+    	{
+			context.focus();
+			return false;
+		}
+    }
+}
+</script>
+<!--显示时间-->
+<script>
+function startTime()
+{
+	var today=new Date()
+	var h=today.getHours()
+	var m=today.getMinutes()
+	var s=today.getSeconds()
+	m=checkTime(m)
+	s=checkTime(s)
+	document.getElementById('time').innerHTML=h+":"+m+":"+s
+	t=setTimeout('startTime()',500)
+}
+function checkTime(i)
+{
+	if (i<10) 
+    {i="0" + i}
+    return i
+}
+</script>
 </head>
-<body>
+		
+<body onload="startTime()">
+<h1><strong>最优套餐 免费推荐</strong></h1>
+<p id="time"></p>
+<link type="text/css" rel="stylesheet" href="http://www.webjx.com/images/main.css" media="screen">
+<hr /><hr />
+<p>请选择下列一种方式：</p>
 
-<h1><strong><center>最优套餐 免费推荐</strong></h1>
-<p>
-<form>
-  <select name="省份">
-    <option value="黑龙江省" selected="selected">黑龙江省</option>
-    <option value="吉林省">吉林省</option>
-  </select>
-</form>
-<input type="radio" name="运营商" vulue="four"/>联通 
-<input type="radio" name="运营商" vulue="five"/> 移动
-<input type="radio" name="运营商" vulue="six"/> 电信
-<hr />
-</p>
-<div>
-<img src="/images/eg_mouse.jpg" /><br />
-
-</div>
-
-<p> 
-请选择下列一种方式：</p>
-<ol><input type="radio" name="shuru" vulue="one"/> 输入号码
-
-  <br />
-  <form>
-    <input type="text">
-    <br />
-  </form>
+<ol> 
+	<input type="radio" name="shuru" vulue="one"/>输入号码<br />
+    <form action="submitpage.htm" onsubmit="return validateform(this)">
+    <input type="text" name="number" size="11">
+    <input type="submit" value="确定" /><br />
+    </form>
   
-<input type="radio" name="shuru" vulue="two"/> 话费账单粘贴处（短信直接粘贴即可）
-
-  <form>
-    <input type="text">
-    <br />
-  </form>
+    <input type="radio" name="shuru" vulue="two"/> 话费账单粘贴处（短信直接粘贴即可）
+    <form action="submitpage.htm" onsubmit="return validate_form(this)">
+    <textarea name="context" rows="10" cols="40"></textarea>
+    <input type="submit" value="确定" /><br />
+    </form>
   
-<input type="radio" name="shuru"vulue="three"/> 手动输入
-
-  <ul class="inside">
+    <input type="radio" name="shuru"vulue="three"/> 手动输入
+    <ul class="inside">
     <li>电话费用（元）</li>
     <form>
-      <input type="text">
-      <br />
-     </form>
-    <li>短信费用（）</li>
+      <input type="text"><br />
+    </form>
+    <li>短信数目（条）</li>
     <form>
-      <input type="text">
-      <br />
-     </form>
-    <li>流量费用</li>
-    <form>
-      <input type="text">
-      <input type="submit" value="确定" />
-      <br />
-     </form>
+      <input type="text"><br />
+    </form>
+    <li>流量费用（元）</li>
+	<form action="submitpage.htm" onsubmit="return validate_form(this)">
+        <input type="text" name="context" size="20"><br />
+        <input type="submit" value="确定" /><br />
+    </form>
     </ul>  
 </ol>
-<hr />
 
-</form>
- <form>
-      <input type="submit" value="查询次数" />
-       <input type="submit" value="价钱" />
-        <input type="submit" value="优惠项" />
-      <br />
-     </form>
+<form>
+	<input type="submit" value="查询次数" />
+    <input type="submit" value="价钱" />
+    <input type="submit" value="优惠项" /><br />
+</form><br />
+
 <p>价格区间/月</p>
 <form>
+	<input name="textfield" type="text" size="4" maxlength="6" />-<input name="textfield" type="text" size="4" maxlength="6" />
+</form><br />
+
+<div>评价</div>
+<form>
+	<textarea  rows="10" cols="85"></textarea>
+	<input type="submit" name="submit" size="60" value="提交" />
+</form>
+</body>
+</html>
+
+<input name="textfield" type="text" size="4" maxlength="6" />-<input name="textfield" type="text" size="4" maxlength="6" />
+     </form>
+<hr />
+
+<p>
+<caption>评价</caption>
+</p>
+
+<p><textarea rows="10" cols="85"></textarea></p>
+</body>
+</html>
