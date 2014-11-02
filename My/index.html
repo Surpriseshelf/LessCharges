@@ -8,21 +8,21 @@
 <style type="text/css">
 body 
 {
-	font-family:"宋体";
+font-family:"宋体";
 }
-h1
-{
-	font-size:70px;
-}
+/*#tips{
+float:right;
+margin:0 15px;  这个15px就是对于表格左右留出15像素的空间 
+}*/
 </style>
 
-<script type="text/javascript">
+<script>
 <!--这里是判断输入的号码是否正确（非空且11位）-->
 function validnumber(field,alerttxt)
 {
 	with (field)
     {
-        if (value==null||value==""||value.length!=11||isNaN)
+        if (value==null||value==""||value.length()!=11||isNaN)
     	{
 			alert(alerttxt);
 			return false;
@@ -92,51 +92,92 @@ function checkTime(i)
     return i
 }
 </script>
+<!--此部分实现三选一模式-->
+<script>
+function Change(obj)
+{
+   var s = document.getElementsByName("s");
+   for (var i = 0; i < s.length; i++)
+   {
+       if (s[i].id == obj)
+       {
+           document.getElementById(s[i].id).style.display = "block";
+       }
+       else
+	   {
+      	   document.getElementById(s[i].id).style.display = "none";
+       }
+    }     
+}
+</script>
 </head>
 		
 <body onload="startTime()">
-<h1><strong>最优套餐 免费推荐</strong></h1>
+<h1><center><strong>最优套餐 免费推荐</strong></h1>
 <p id="time"></p>
 <link type="text/css" rel="stylesheet" href="http://www.webjx.com/images/main.css" media="screen">
-<hr /><hr />
+<hr /><hr /><br />
+<div id ="tips">
+<p>
+注意 ：
+2G -> 3G -> 4G!!
+如果套餐更换，这个顺序是不会变的。
+</p>
+<img src= "image/tip.jpg"  alt= "温馨提示"/>
+</div>
 <p>请选择下列一种方式：</p>
 
 <ol> 
-	<input type="radio" name="shuru" vulue="one"/>输入号码<br />
+	<input name="1" type="radio" onclick="Change('1')"/> 输入号码<br /></li>
+	<div id="1" name="s" style="display:none;float:down" />
     <form action="submitpage.htm" onsubmit="return validateform(this)">
     <input type="text" name="number" size="11">
-    <input type="submit" value="确定" /><br />
+    <input type="submit" value="确定" />
     </form>
-  
-    <input type="radio" name="shuru" vulue="two"/> 话费账单粘贴处（短信直接粘贴即可）
+    </div>
+	
+    <input name="1" type="radio" onclick="Change('2')"/> 账单粘贴<br /></li>
+	<div id="2" name="s" style="display:none;float:down" />
     <form action="submitpage.htm" onsubmit="return validate_form(this)">
     <textarea name="context" rows="10" cols="40"></textarea>
-    <input type="submit" value="确定" /><br />
+    <input type="submit" value="确定" />
     </form>
-  
-    <input type="radio" name="shuru"vulue="three"/> 手动输入
-    <ul class="inside">
+    </div>
+	
+    <input name="1" type="radio" onclick="Change('3')"/> 手动输入<br /></li>
+	<div id="3" name="s" style="display:none;float:down" />
+    <ul>
     <li>电话费用（元）</li>
     <form>
-      <input type="text"><br />
+      <input placeholder=" 电话费用" type="text">
     </form>
     <li>短信数目（条）</li>
     <form>
-      <input type="text"><br />
+      <input placeholder=" 短信条数" type="text">
     </form>
     <li>流量费用（元）</li>
 	<form action="submitpage.htm" onsubmit="return validate_form(this)">
-        <input type="text" name="context" size="20"><br />
-        <input type="submit" value="确定" /><br />
-    </form>
+        <input placeholder=" 流量费用" type="text" name="context" size="20"><br />
+		<input type="submit" value="确定" /><br/>  
+	</form>
+	</div>	 
     </ul>  
 </ol>
-
-<form>
-	<input type="submit" value="查询次数" />
-    <input type="submit" value="价钱" />
-    <input type="submit" value="优惠项" /><br />
-</form><br />
+<hr /><hr />
+<div class="fn-t" style="opacity: 1; margin-left: 0px;">
+     <img src="image/xl0.png" alt="无法加载">
+</div>
+<div class="tab-bar tbcomm" style="width:736px;">
+                    <a href="javascript:;" data-step="f12">
+                        <span>查询次数</span>
+                    </a>
+                    <a id="camera" href="javascript:;" data-step="f13">
+                        <span>价钱</span>
+                    </a>
+                    <a href="javascript:;" data-step="f14">
+                        <span>优惠项</span>
+                    </a>
+</div><br />
 
 <p>价格区间/月</p>
 <form>
@@ -148,17 +189,6 @@ function checkTime(i)
 	<textarea  rows="10" cols="85"></textarea>
 	<input type="submit" name="submit" size="60" value="提交" />
 </form>
-</body>
-</html>
-
-<input name="textfield" type="text" size="4" maxlength="6" />-<input name="textfield" type="text" size="4" maxlength="6" />
-     </form>
-<hr />
-
-<p>
-<caption>评价</caption>
-</p>
-
-<p><textarea rows="10" cols="85"></textarea></p>
+<hr /><hr />
 </body>
 </html>
