@@ -1,38 +1,3 @@
-1.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 1.Who are we?
   we are students from HIT, Harbin, Hei Longjiang Province, China.
 2.Why do we do this?
